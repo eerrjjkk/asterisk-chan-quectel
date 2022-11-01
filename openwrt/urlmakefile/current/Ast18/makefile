@@ -8,12 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=asterisk-chan-quectel
-PKG_VERSION:=3.6
-PKG_RELEASE:=3.6
+PKG_VERSION:=3.5
+PKG_RELEASE:=3.5
 
-PKG_SOURCE:=master.zip
-PKG_SOURCE_URL:=https://github.com/IchthysMaranatha/asterisk-chan-quectel/archive/refs/heads/
-PKG_CAT:=unzip
+PKG_SOURCE:=3.5.tar.gz
+PKG_SOURCE_URL:=https://github.com/IchthysMaranatha/asterisk-chan-quectel/archive/refs/tags/
 PKG_HASH:=skip
 
 PKG_FIXUP:=autoreconf
@@ -21,13 +20,6 @@ PKG_FIXUP:=autoreconf
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYRIGHT.txt LICENSE.txt
 PKG_MAINTAINER:=Jiri Slachta <jiri@slachta.eu>
-
-define Build/Prepare
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
-$(CP) ./src/* $(PKG_BUILD_DIR)/
-endef
-
-
 
 MODULES_DIR:=/usr/lib/asterisk/modules
 
@@ -51,11 +43,8 @@ endef
 
 CONFIGURE_ARGS+= \
 	--with-asterisk=$(STAGING_DIR)/usr/include \
-		--with-astversion=18 \
-		--with-iconv=$(ICONV_PREFIX)/include
-
-TARGET_CFLAGS+= \
-	-I$(CHAN_quectel_AST_HEADERS)
+	--with-astversion=18 \
+	--with-iconv=$(ICONV_PREFIX)/include
 
 MAKE_FLAGS+=LD="$(TARGET_CC)"
 
