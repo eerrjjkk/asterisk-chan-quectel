@@ -54,6 +54,7 @@ Package/asterisk16-chan-quectel/description = $(Package/description/Default)
 ifeq ($(BUILD_VARIANT),asterisk16)
   CHAN_quectel_AST_HEADERS:=$(STAGING_DIR)/usr/include/asterisk-16/include
   CONFIGURE_ARGS+= \
+  	  --with-iconv=$(ICONV_PREFIX)/include \
 	  --with-astversion=16
 endif
 
